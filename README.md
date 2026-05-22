@@ -22,6 +22,17 @@ npm start
 
 Open `http://localhost:3000`.
 
+## Vercel Deployment
+
+The deployed app uses `api/plan.js` as a Vercel serverless function. Add these environment variables in Vercel Project Settings:
+
+```bash
+GEMINI_API_KEY=your_key_here
+GEMINI_MODEL=gemini-2.5-flash-lite
+```
+
+After changing environment variables, redeploy the project.
+
 ## Safety Notes
 
 - The browser never receives the Gemini API key.

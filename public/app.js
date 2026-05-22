@@ -76,6 +76,19 @@ function renderPlan(plan) {
   `;
 }
 
+async function readApiResponse(response) {
+  const contentType = response.headers.get("content-type") || "";
+
+  if (contentType.includes("application/json")) {
+    return response.json();
+  }
+
+  const text = await response.text();
+  return {
+    error: text.trim() || "The server returned an unexpected response."
+  };
+}
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   setView("loading");
@@ -93,7 +106,7 @@ form.addEventListener("submit", async (event) => {
       body: JSON.stringify(payload)
     });
 
-    const data = await response.json();
+    const data = await readApiResponse(response);
     if (!response.ok) {
       throw new Error(data.error || "Could not create the plan.");
     }
