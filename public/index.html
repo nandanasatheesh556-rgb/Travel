@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="planner-panel" aria-labelledby="app-title">
+        <div class="title-row">
+          <div>
+            <p class="eyebrow">Gemini Flash-Lite planner</p>
+            <h1 id="app-title">AI Travel Planner</h1>
+          </div>
+          <span class="status-pill">API key stays on backend</span>
+        </div>
+
+        <form id="planner-form" class="planner-form">
+          <label>
+            Destination
+            <input name="destination" placeholder="Tokyo, Japan" required maxlength="120">
+          </label>
+
+          <label>
+            Starting from
+            <input name="origin" placeholder="Delhi" maxlength="120">
+          </label>
+
+          <div class="field-grid">
+            <label>
+              Days
+              <input name="days" type="number" min="1" max="21" value="5" required>
+            </label>
+
+            <label>
+              Budget
+              <select name="budget">
+                <option>budget</option>
+                <option selected>mid-range</option>
+                <option>premium</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              Travelers
+              <input name="travelers" placeholder="2 adults" maxlength="80">
+            </label>
+
+            <label>
+              Pace
+              <select name="pace">
+                <option>relaxed</option>
+                <option selected>balanced</option>
+                <option>packed</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Travel style
+            <input name="style" placeholder="culture, food, nature" maxlength="160">
+          </label>
+
+          <label>
+            Interests
+            <textarea name="interests" rows="3" placeholder="Street food, museums, scenic walks, cafes" maxlength="400"></textarea>
+          </label>
+
+          <label>
+            Notes
+            <textarea name="notes" rows="3" placeholder="Accessibility needs, kids, vegetarian food, must-see places" maxlength="400"></textarea>
+          </label>
+
+          <button type="submit" id="submit-button">
+            <span>Generate plan</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="results-panel" aria-live="polite">
+        <div id="empty-state" class="empty-state">
+          <h2>Your itinerary will appear here</h2>
+          <p>Enter your trip details and get a day-by-day plan with food ideas, safety notes, packing tips, and booking reminders.</p>
+        </div>
+
+        <div id="loading-state" class="loading-state hidden">
+          <div class="spinner"></div>
+          <p>Building your itinerary...</p>
+        </div>
+
+        <div id="error-state" class="error-state hidden"></div>
+        <article id="plan-output" class="plan-output hidden"></article>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
